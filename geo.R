@@ -12,9 +12,10 @@ for (i in 1:length(batch1000$bathrooms)){
 q=161
 q2=1000
 trailbatch <-  dato[q:q2,]
-batch4000 <- dato[1001:4000,]
+library("ggmap")
+batch3 <- dato[841:5841,]
 for (i in q:q2){
-  res <- revgeocode(c(trailbatch$longitude[i], trailbatch$latitude[i]), output="more")
+  res <- revgeocode(c(batch3$longitude[i], batch3$latitude[i]), output="more")
   if(is.null(levels(res$street_number))==TRUE){dato$street_number[i]=NA}
   else {dato$street_number[i]=levels(res$street_number)}
   if(is.null(levels(res$route))==TRUE){dato$route[i]=NA}

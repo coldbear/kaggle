@@ -112,7 +112,7 @@ dato$image_missing=FALSE
 for (i in 1:length(dato$bathrooms)){if (length(unlist(dato$photos[i]))==0){dato$image_missing[i]=TRUE}}
 
 #Trying first functions
-dato1 <- dato[1:10000,]
+dato1 <- dato[1:5000,]
 dato1$description <- NULL
 dato1$features <- NULL
 dato1$photos <- NULL
@@ -125,7 +125,7 @@ sentiment <- get_nrc_sentiment(dato$description)
 
 datatable(head(sentiment))
 dato<-merge(dato,sentiment, by.x="ID", by.y="ID", all.x=T, all.y=T)
-dato1 <- dato[1:90,]
+dato1 <- dato[1:500,]
 dato1$description <- NULL
 dato1$features <- NULL
 dato1$photos <- NULL
@@ -139,7 +139,7 @@ dato1$neighborhood <-as.factor(dato1$neighborhood)
 
 regr1 <- glm(interest_level~bathrooms+bedrooms+price+build_freq+postweek+postday+manager_grade+manager_rank+neighborhood, dato1, family = quasibinomial(link="logit"))
 summary(regr1)
-regr2 <- glm(interest_level~bathrooms+bedrooms+price+build_freq+postweek+postday+manager_grade+manager_rank+neighborhood+anger+fear+joy+anticipation+disgust+sadness+surprise+trust+negative+positive, dato1, family = quasibinomial(link="logit"))
+regr2 <- glm(interest_level~bathrooms+bedrooms+price+build_freq+postweek+postday+manager_grade+manager_rank+neighborhood+anger+fear+joy+anticipation+disgust+sadness+surprise+trust+negative+positive, dato1, family = "logit"))
 summary(regr2)
 sentiment$ID=0
 dato$ID=0
